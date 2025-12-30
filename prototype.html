@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Git for Health – Hospital Grade Prototype</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0f172a;
+  --teal:#0d9488;
+  --blue:#2563eb;
+  --red:#dc2626;
+  --green:#16a34a;
+  --yellow:#ca8a04;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --border:#e5e7eb;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui;
+  background:var(--bg);
+  color:#0f172a;
+}
+.hidden{display:none}
+
+/* Header */
+header{
+  background:var(--navy);
+  color:white;
+  padding:16px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header h1{font-size:20px;margin:0}
+header span{font-size:13px;opacity:.8}
+
+/* Layout */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:24px;
+}
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  border:1px solid var(--border);
+  margin-bottom:24px;
+}
+
+/* Buttons */
+button{
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+.primary{background:var(--teal);color:white}
+.blue{background:var(--blue);color:white}
+.red{background:var(--red);color:white}
+.gray{background:#64748b;color:white}
+
+/* Inputs */
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  margin-top:8px;
+}
+
+/* Role cards */
+.roles{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.role{
+  padding:24px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  cursor:pointer;
+  transition:.2s;
+}
+.role:hover{transform:translateY(-4px)}
+.role h3{margin:12px 0 4px}
+
+/* Timeline */
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+}
+.tag{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  color:white;
+  font-size:12px;
+  margin-bottom:8px;
+}
+.green{background:var(--green)}
+.yellow{background:var(--yellow)}
+.redtag{background:var(--red)}
+ul{padding-left:18px;margin:0}
+
+/* Emergency */
+.alert{
+  background:#fff1f2;
+  border-left:6px solid var(--red);
+  padding:18px;
+  border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Git for Health</h1>
+  <span>Enterprise Hospital System</span>
+</header>
+
+<div class="container">
+
+<!-- ENTRY -->
+<div id="entry" class="card">
+  <h2>Select Interface</h2>
+  <p>Secure healthcare access</p>
+  <div class="roles">
+    <div class="role" onclick="show('hospital-login')">
+      <h3>🏥 Hospital</h3>
+      <p>Doctor Interface</p>
+    </div>
+    <div class="role" onclick="show('patient-login')">
+      <h3>👤 Patient</h3>
+      <p>Citizen Health Dashboard</p>
+    </div>
+    <div class="role" onclick="show('ambulance')">
+      <h3>🚑 Pre-Med</h3>
+      <p>Emergency System</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOSPITAL LOGIN -->
+<div id="hospital-login" class="card hidden">
+  <h2>Doctor Login</h2>
+  <input placeholder="Hospital ID">
+  <input placeholder="Doctor ID">
+  <input placeholder="Aadhaar OTP (Simulated)">
+  <br><br>
+  <button class="primary" onclick="show('hospital-dashboard')">Secure Login</button>
+  <button class="gray" onclick="show('entry')">Back</button>
+</div>
+
+<!-- HOSPITAL DASHBOARD -->
+<div id="hospital-dashboard" class="card hidden">
+  <h2>Patient Medical Timeline (Git View)</h2>
+  <p><strong>Patient:</strong> Rajesh Kumar • Health ID: HIR-2024-8847291</p>
+
+  <div class="timeline">
+    <div>
+      <div class="tag green">What’s New</div>
+      <ul>
+        <li>HbA1c Report – 7.2%</li>
+        <li>CT Scan uploaded</li>
+      </ul>
+    </div>
+    <div>
+      <div class="tag yellow">What Changed</div>
+      <ul>
+        <li>Metformin: 500mg → 850mg</li>
+        <li>Atorvastatin increased</li>
+      </ul>
+    </div>
+    <div>
+      <div class="tag redtag">What’s Missing</div>
+      <ul>
+        <li>Lipid Profile (Overdue)</li>
+      </ul>
+    </div>
+  </div>
+
+  <br>
+  <button class="gray" onclick="show('entry')">Logout</button>
+</div>
+
+<!-- PATIENT LOGIN -->
+<div id="patient-login" class="card hidden">
+  <h2>Patient Login</h2>
+  <input placeholder="Health ID / Mobile">
+  <input placeholder="Aadhaar OTP">
+  <br><br>
+  <button class="blue" onclick="show('patient-dashboard')">Verify & Login</button>
+  <button class="gray" onclick="show('entry')">Back</button>
+</div>
+
+<!-- PATIENT DASHBOARD -->
+<div id="patient-dashboard" class="card hidden">
+  <h2>My Health Dashboard</h2>
+  <ul>
+    <li>💊 Medications: 3 Active</li>
+    <li>🧪 Lab Reports: 8</li>
+    <li>🧠 Diagnoses: Diabetes, Hypertension</li>
+    <li>🏥 Hospitals: AIIMS, Apollo</li>
+  </ul>
+  <br>
+  <button class="primary" onclick="show('consent')">Manage Consent</button>
+  <button class="gray" onclick="show('entry')">Logout</button>
+</div>
+
+<!-- CONSENT -->
+<div id="consent" class="card hidden">
+  <h2>Consent Control</h2>
+  <p>AIIMS Delhi → ✅ Granted</p>
+  <p>Apollo Hospital → ✅ Granted</p>
+  <p>Fortis Hospital → ❌ Revoked</p>
+  <br>
+  <button class="gray" onclick="show('patient-dashboard')">Back</button>
+</div>
+
+<!-- AMBULANCE -->
+<div id="ambulance" class="card hidden">
+  <h2>Emergency Intake (Ambulance)</h2>
+  <input placeholder="Symptoms (Chest pain, paralysis)">
+  <input placeholder="BP">
+  <input placeholder="Pulse">
+  <input placeholder="SpO₂">
+  <br><br>
+  <button class="red" onclick="show('ai')">Analyze with AI</button>
+  <button class="gray" onclick="show('entry')">Back</button>
+</div>
+
+<!-- AI RESULT -->
+<div id="ai" class="card hidden">
+  <div class="alert">
+    <h3>⚠️ High Risk: Heart Attack</h3>
+    <p>Confidence: 87%</p>
+  </div>
+
+  <h3>Hospital Pre-Alert</h3>
+  <ul>
+    <li>ETA: 12 minutes</li>
+    <li>Cardiologist notified</li>
+    <li>ICU Bed reserved</li>
+    <li>Cath Lab ready</li>
+  </ul>
+
+  <br>
+  <button class="gray" onclick="show('entry')">End Session</button>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
